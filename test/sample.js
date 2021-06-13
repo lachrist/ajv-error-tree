@@ -19,7 +19,7 @@ const schema = {
             { not: { type: "number" } },
           ],
         },
-        { type: "number" },
+        { const: "qux" },
       ],
     },
   },
@@ -59,13 +59,19 @@ if (!validate(data)) {
   //         oneOf:
   //           - ... (object)
   //           - ... (object)
+  //     params:
+  //       passingSchemas:
+  //         - 0
+  //         - 1
   //     message: must match exactly one schema in oneOf
   //   - instance:
   //       path: /foo
   //       data: bar
   //     schema:
-  //       path: /properties/foo/anyOf/1/type
+  //       path: /properties/foo/anyOf/1/const
   //       data:
-  //         type: number
-  //     message: must be number
+  //         const: qux
+  //     params:
+  //       allowedValue: qux
+  //     message: must be equal to constant
 }
