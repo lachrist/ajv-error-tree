@@ -34,9 +34,38 @@ if (!validate(data)) {
   // └─ +
   //    ├─ 0: /properties/foo/anyOf/0/oneOf >> /foo must match exactly one schema in oneOf
   //    └─ 1: /properties/foo/anyOf/1/type >> /foo must be number
-  console.log(YAML.stringify(tree2));
-  // .: /properties/foo/anyOf >> /foo must match a schema in anyOf
-  // +:
-  //   - /properties/foo/anyOf/0/oneOf >> /foo must match exactly one schema in oneOf
-  //   - /properties/foo/anyOf/1/type >> /foo must be number
+  const tree3 = summarizeAJVErrorTree(tree1, {
+    "schema-depth": 2,
+    "instance-depth": 2,
+  });
+  console.log(YAML.stringify(tree3));
+  // instance:
+  //   path: /foo
+  //   data: bar
+  // schema:
+  //   path: /properties/foo/anyOf
+  //   data:
+  //     anyOf:
+  //       - ... (object)
+  //       - ... (object)
+  // message: must match a schema in anyOf
+  // children:
+  //   - instance:
+  //       path: /foo
+  //       data: bar
+  //     schema:
+  //       path: /properties/foo/anyOf/0/oneOf
+  //       data:
+  //         oneOf:
+  //           - ... (object)
+  //           - ... (object)
+  //     message: must match exactly one schema in oneOf
+  //   - instance:
+  //       path: /foo
+  //       data: bar
+  //     schema:
+  //       path: /properties/foo/anyOf/1/type
+  //       data:
+  //         type: number
+  //     message: must be number
 }
