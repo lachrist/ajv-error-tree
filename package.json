@@ -1,9 +1,9 @@
 {
   "name": "ajv-error-tree",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "test": "node test/test.js",
-    "prettier": "npx prettier --write 'lib/*.js' 'test/*.js'",
+    "format": "npx prettier --write 'lib/*.js' 'test/*.js'",
     "lint": "npx eslint 'lib/*.js' 'test/*.js'"
   },
   "files": [
